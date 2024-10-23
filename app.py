@@ -12,7 +12,7 @@ app = Flask(__name__)
 client = MongoClient(os.getenv("MONGODB_URI"))
 db = client['ImpactMapDB']  # Replace with your database name
 
-# Register the authentication routes
+# Register the authentication routesgi
 app.register_blueprint(auth_routes)
 
 @app.route('/')

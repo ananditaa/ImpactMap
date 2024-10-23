@@ -24,11 +24,11 @@ def register():
     password = data.get('password')
 
     # Check if user already exists
-    if db.users.find_one({"username": username}):
+    if db.UserAuth.find_one({"username": username}):
         return jsonify({"msg": "User already exists"}), 400
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-    db.users.insert_one({"username": username, "password": hashed_password})
+    db.UserAuth.insert_one({"username": username, "password": hashed_password})
     return jsonify({"msg": "User registered successfully"}), 201
 
 # User login
@@ -38,7 +38,7 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
-    user = db.users.find_one({"username": username})
+    user = db.UserAuth.find_one({"username": username})
     if not user or not bcrypt.check_password_hash(user['password'], password):
         return jsonify({"msg": "Invalid credentials"}), 401
 
