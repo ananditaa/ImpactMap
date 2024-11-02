@@ -3,3 +3,4 @@ pymongo
 python-dotenv
 Flask-Bcrypt
 Flask-JWT-Extended
+pandas
