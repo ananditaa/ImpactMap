@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; // For navigation
 import './Auth.css'; // Import the CSS file for styling
 
 const LoginForm = () => {
@@ -11,13 +11,19 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error message before submission
     try {
+      const response = await axios.post('http://localhost:5000/login', { username, password });
+      // Assuming the backend returns a token in `response.data.token`
+      //const { access_token } = response.data["access_token"];
+  
+      // Save the token to localStorage or cookies for subsequent API requests
+      localStorage.setItem('token', response.data["access_token"]);
+      // Redirect to the questionnaire page
       navigate('/questionnaire');
-      //const response = await axios.post('http://localhost:5000/login', { username, password });
-      //console.log('Logged in successfully', response.data);
-      // You can also redirect the user or perform other actions after a successful login
     } catch (err) {
-      setError('Invalid username or password');
+      console.error(err);
+      setError(err.response?.data?.message || 'Invalid username or password');
     }
   };
 

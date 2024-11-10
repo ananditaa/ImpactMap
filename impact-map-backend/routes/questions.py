@@ -8,7 +8,7 @@ questions_routes = Blueprint('questions', __name__)
 
 # SageMaker setup
 sagemaker_client = boto3.client('sagemaker-runtime',region_name='us-east-1')
-SAGEMAKER_ENDPOINT_NAME = "sagemaker-xgboost-2024-11-01-10-54-11-768"
+SAGEMAKER_ENDPOINT_NAME = "sagemaker-xgboost-2024-11-10-14-28-58-701"
 
 def get_prediction_from_sagemaker(encoded_data):
     # Convert the encoded data list to a CSV string
